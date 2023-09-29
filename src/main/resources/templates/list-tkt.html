@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="ISO-8859-1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Ticket Tracker Application</title>
+</head>
+<body>
+	<h2>Ticket Tracker Application</h2>
+	<div class="container mt-5 pt-2 border">
+		<h1 style="color: black; text-align: left">List of Tickets</h1>
+		<hr>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<!-- <form class="form-inline" action="/action_page.php">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+				<button class="btn btn-success mr-sm-2" type="submit">Search</button>
+			</form> -->
+			<ul class="navbar-nav">
+				<li class="nav-item mr-sm-2"><a class="btn btn-info"
+					href="addTicket ">New Ticket</a></li>
+				<!-- <li class="nav-item mr-sm-2"><a class="btn btn-info" href="list">Show
+						Books</a></li> -->
+			</ul>
+		</nav>
+	</div>
+	<div class="container mt-5 pt-2 border">
+		<!-- <h3 style="text-align: center; color: red">Book Directory</h3> -->
+		<hr>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>S.No</th>
+					<th>Ticket Title</th>
+					<th>Ticket Short Description</th>
+					<th>Ticket Created On</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tkt, iStat : ${ticket}">
+					<td th:text="${iStat.count}" />
+					<td th:text="${tkt.ticketTitle}" />
+					<td th:text="${tkt.ticketShortDes}" />
+					<td th:text="${tkt.ticketCreatedOn}" />
+					<td><a th:href="@{/tickets/edit/{id}(id=${tkt.id})}"
+						class="btn btn-primary">Edit</a> <a
+						th:href="@{/tickets/{id}(id=${tkt.id})}"
+						class="btn btn-danger">Delete</a>
+						<a th:href="@{/tickets/{id}(id=${tkt.id})}"
+						class="btn btn-info">View</a></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
