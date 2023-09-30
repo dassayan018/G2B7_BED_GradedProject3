@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Ticket Details</title>
+<style>
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: #f0f0f0;
+	padding: 20px;
+	margin: 0;
+}
+
+.ticket-card {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+.ticket-card h1 {
+	font-size: 24px;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.ticket-card table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 15px;
+}
+
+.ticket-card th, .ticket-card td {
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.ticket-card th {
+	background-color: #f5f5f5;
+}
+
+.back-button {
+	margin-top: 20px;
+}
+
+.back-button a {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.back-button a:hover {
+	background-color: #2980b9;
+}
+</style>
+</head>
+<body>
+	<div class="ticket-card">
+		<h1>Ticket Details</h1>
+		<table>
+			<tr>
+				<th>ID</th>
+				<td><span th:text="${ticket.id}"></span></td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td><span th:text="${ticket.ticketTitle}"></span></td>
+			</tr>
+			<tr>
+				<th>Short Description</th>
+				<td><span th:text="${ticket.ticketShortDes}"></span></td>
+			</tr>
+			<tr>
+				<th>Created On</th>
+				<td><span th:text="${ticket.ticketCreatedOn}"></span></td>
+			</tr>
+		</table>
+		<div class="back-button">
+			<a href="/tickets/">Back to Ticket List</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -87,5 +87,13 @@ public class TicketController {
 		tktService.deleteById(id);
 		return "redirect:/tickets";
 	}
+	
+	@GetMapping("/tickets/view/{id}")
+	public String viewTicket(@PathVariable int id, Model model) {
+		Ticket ticket = tktService.findByID(id);
+//		tktService.findByID(id);
+		model.addAttribute("ticket", ticket);
+		return "view-ticket";
+	}
 
 }

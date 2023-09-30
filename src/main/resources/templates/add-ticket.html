@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Ticket Management System</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<style>
+body {
+	background-color: #f4f4f4;
+	padding: 20px;
+}
+
+.card {
+	border: none;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.ribbon {
+	width: 100%;
+	background-color: #3498db;
+	color: white;
+	padding: 10px;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<!-- Brand -->
 		<a class="navbar-brand" href="#">Ticket Management System</a>
 
-		<!-- Toggler/collapsibe Button -->
+		<!-- Toggler/collapsible Button -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -30,40 +52,63 @@
 	<br>
 	<br>
 	<div class="container">
-		<div class="row">
-			<div
-				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-				<h1 class="text-center">Create New Ticket</h1>
-				<div class="card-body">
-					<form th:action="@{/tickets}" th:object="${ticket}" method="POST">
-						<div class="form-group">
-							<label> Ticket Title </label> <input type="text"
-								name="ticketTitle" th:field="*{ticketTitle}"
-								class="form-control" placeholder="Enter ticket title" />
-						</div>
-
-						<div class="form-group">
-							<label> Ticket Short Description </label> <input type="text"
-								name="ticketShortDes" th:field="*{ticketShortDes}"
-								class="form-control"
-								placeholder="Please provide some description" />
-						</div>
-
-						<div class="form-group">
-							<label> Created On </label> <input type="text"
-								name="ticketCreatedOn" th:field="*{ticketCreatedOn}"
-								class="form-control"
-								placeholder="Please provide the ticket creation Date" />
-						</div>
-
-						<div class="box-footer">
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</div>
-					</form>
-
+		<div class="row justify-content-center">
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="card">
+					<div class="card-body">
+						<h1 class="text-center mb-4 ribbon">Create New Ticket</h1>
+						<form th:action="@{/tickets}" th:object="${ticket}" method="POST">
+							<div class="form-group">
+								<label><span class="ribbon">Ticket Title</span></label> <input
+									type="text" class="form-control" th:field="*{ticketTitle}"
+									placeholder="Enter Ticket Title">
+							</div>
+							<div class="form-group">
+								<label><span class="ribbon">Ticket Short
+										Description</span></label> <input type="text" class="form-control"
+									th:field="*{ticketShortDes}"
+									placeholder="Enter Short Description of Ticket">
+							</div>
+							<div class="form-group">
+								<label><span class="ribbon">Ticket Created On</span></label> <input
+									type="text" class="form-control" th:field="*{ticketCreatedOn}"
+									placeholder="Select Ticket Created On"
+									data-provide="datepicker">
+							</div>
+							<button type="submit" class="btn btn-primary btn-block">Submit</button>
+						</form>
+					</div>
+					<div class="text-center mt-3">
+						<button class="btn btn-secondary" onclick="goBack()">Back
+							to Tickets</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<!-- Bootstrap JS and dependencies -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+	<script>
+    $(document).ready(function () {
+        $('[data-provide="datepicker"]').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true
+        });
+    });
+    function goBack() {
+        var currentLocation = window.location;
+        var newLocation = currentLocation.protocol + '//' + currentLocation.host + '/tickets';
+        window.location.href = newLocation;
+    }
+
+</script>
 </body>
 </html>
